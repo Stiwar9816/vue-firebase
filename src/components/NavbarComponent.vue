@@ -1,8 +1,9 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <router-link class="navbar-item" to="/">
+      <router-link aria-label="Logo" class="navbar-item" to="/">
         <img
+          alt="Logo-VueTalk"
           class="navbar__logo"
           src="../assets/img/VueTalk-logo.png"
           width="112"
@@ -74,10 +75,10 @@ export default {
     async doLogout() {
       try {
         await this.$store.dispatch("user/doLogout");
+        this.$toast.success("Logged out");
         this.$router.push({ name: "auth" });
-        console.log("Logged out");
       } catch (error) {
-        console.error(error.message);
+        this.$toast.error(error.message);
       }
     }
   },

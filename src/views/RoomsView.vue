@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import { fb, auth } from "../firebase";
+import { fb, auth } from "../firebase.js";
 export default {
-  name: "Home",
+  name: "RoomsView",
   data() {
     return {
       user: null
@@ -30,15 +30,16 @@ export default {
         const user = await auth.signInWithPopup(provider);
         this.user = user.user;
       } catch (error) {
-        console.log(error);
+        this.$toast.error(error.message);
       }
     },
     async doLogout() {
       try {
+        this.$toast.success("Logout");
         await auth.signOut();
         this.user = null;
       } catch (error) {
-        console.log(error);
+        this.$toast.error(error.message);
       }
     }
   }

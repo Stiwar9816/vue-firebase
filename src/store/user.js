@@ -1,4 +1,4 @@
-import { auth } from "../firebase";
+import { auth } from "../firebase.js";
 const state = {
   user: null,
 };
@@ -10,6 +10,19 @@ const mutations = {
   },
 };
 const actions = {
+  getCurrentUser() {
+    return new Promise((resolve, reject) => {
+      const unsubcribe = auth.onAuthStateChanged(
+        (user) => {
+          unsubcribe();
+          resolve(user);
+        },
+        () => {
+          reject();
+        }
+      );
+    });
+  },
   async doLogin({ commit }, { email, password }) {
     await auth.signInWithEmailAndPassword(email, password);
     commit("setUser", auth.currentUser);

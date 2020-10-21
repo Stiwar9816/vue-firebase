@@ -8,9 +8,10 @@
             <h1 class="title has-text-centered">Login</h1>
             <form @submit.prevent="doLogin()">
               <div class="field">
-                <label class="label">Email</label>
+                <label class="label" for="email">Email</label>
                 <div class="control has-icons-left has-icons-right">
                   <input
+                    id="email"
                     v-model="userData.email"
                     class="input"
                     type="email"
@@ -26,9 +27,10 @@
                 </div>
               </div>
               <div class="field">
-                <label class="label">Password</label>
+                <label class="label" for="password">Password</label>
                 <p class="control has-icons-left">
                   <input
+                    id="password"
                     v-model="userData.password"
                     class="input"
                     type="password"
@@ -61,9 +63,10 @@
             <h1 class="title has-text-centered">Register</h1>
             <form @submit.prevent="doRegister()">
               <div class="field">
-                <label class="label">Name</label>
+                <label class="label" for="name">Name</label>
                 <div class="control">
                   <input
+                    id="name"
                     v-model="userData.name"
                     class="input"
                     type="text"
@@ -74,9 +77,10 @@
               </div>
 
               <div class="field">
-                <label class="label">Email</label>
+                <label class="label" for="emailRegister">Email</label>
                 <div class="control has-icons-left has-icons-right">
                   <input
+                    id="emailRegister"
                     v-model="userData.email"
                     class="input"
                     type="email"
@@ -86,9 +90,10 @@
                 </div>
               </div>
               <div class="field">
-                <label class="label">Password</label>
+                <label class="label" for="passwordRegister">Password</label>
                 <p class="control has-icons-left">
                   <input
+                    id="passwordRegister"
                     v-model="userData.password"
                     class="input"
                     type="password"
@@ -148,11 +153,11 @@ export default {
           email: this.userData.email,
           password: this.userData.password
         });
-        console.log("Logged in");
+        this.$toast.success("Logged in");
         this.resetData();
         this.redirect();
       } catch (error) {
-        console.error(error.message);
+        this.$toast.error(error.message);
       } finally {
         this.isLoading = false;
       }
@@ -165,11 +170,11 @@ export default {
           email: this.userData.email,
           password: this.userData.password
         });
-        console.log("Account created");
+        this.$toast.success("Account created");
         this.resetData();
         this.redirect();
       } catch (error) {
-        console.error(error.message);
+        this.$toast.error(error.message);
       } finally {
         this.isLoading = false;
       }
